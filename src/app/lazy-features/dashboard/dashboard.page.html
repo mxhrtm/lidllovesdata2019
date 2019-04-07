@@ -1,16 +1,14 @@
 <div class="dashboard-page-wrapper">
     <div class="dashboard-page-wrapper__selector">
-        <button mat-button-raised (click)="op.toggle($event)">
-                Push me
-            </button>
-        <p-overlayPanel #op>
+        <img src="../../../assets/img/superman.png" alt="">
+        <!-- <p-overlayPanel #op>
             <div class="dashboard-page-wrapper__selector__overlay">
                 <mat-list role="list">
                     <mat-list-item role="listitem">Stuttgart</mat-list-item>
                     <mat-list-item role="listitem">Nicht Stuttgart</mat-list-item>
                 </mat-list>
             </div>
-        </p-overlayPanel>
+        </p-overlayPanel> -->
     </div>
     <div class="dashboard-page-wrapper__header">
         <img src="../../../../assets/img/Lidl-Logo.png" alt="Lidl Logo">
@@ -24,29 +22,63 @@
     </div>
     <div class="dashboard-page-wrapper__contnet">
         <mat-card class="content-card">
-            <div class="content-card__headline">
-                <span>Morgen, Montag 8. April 2019</span>
+            <div class="content-card__headline" style="height: 54px;">
+                <span>Tomorrow, Monday 8. April 2019</span>
             </div>
             <div class="content-card__body">
-                <img src="../../../../assets/img/sunny_s_cloudy.png" alt="Sunny ">
                 <div class="content-card__body__weather">
-                    <span>Aussicht: sonnig</span>
-                    <span>Regenwahrscheinlichkeit: 8%</span>
+                    <span style="font-size: 25px; margin: 10px auto; ">Weather</span>
+                    <div style="display: flex;">
+                        <span style="font-size: 50px; margin-left: 10px;">26°C</span>
+                        <img src="../../../../assets/img/sunny_s_cloudy.png" alt="Sunny ">
+                    </div>
+                    <div style="display: flex; margin: 5px 0;">
+                        <span style="font-style: italic; margin: auto 0 auto 5px;">sunny</span>
+                    </div>
+                    <div style="display: flex; margin: 20px 0;">
+                        <span style="margin: auto 5px; font-style: italic; font-size: 20px;">chance of rain</span>
+                        <span style="margin: auto 5px; font-size: 20px;">7%</span>
+                    </div>
+                   
+                </div>
+                <div class="content-card__body__divider"></div>
+                <div class="content-card__body__events" style="flex: 1; display: flex; flex-direction: column;">
+                    <span style="font-size: 25px; margin: 10px auto; ">Events</span>
+                    <table>
+                        <tr>
+                            <td>10.04.2019</td>
+                            <td style="font-style: normal; font-weight: bold">Festival</td>
+                            <td>3.2km</td>
+                        </tr>
+                        <tr>
+                            <td>11.04.2019</td>
+                            <td style="font-style: normal; font-weight: bold">Concert: Phil Collins</td>
+                            <td>5.0km </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </mat-card>
         <mat-card class="content-card">
             <div class="content-card__headline">
-                <span>Super Auswahl!</span>
+                <span>Top Products</span>
             </div>
             <p-chart type="bar" [data]="_bardata"></p-chart>
         </mat-card>
         <mat-card class="content-card table-card">
             <div class="content-card__headline">
-                <span>Bestellungen</span>
+                <span>Orderboard</span>
+            </div>
+            <div *ngIf="generated" class="content-card__slider">
+                <span>Channels</span>
+                <mat-slide-toggle (toggleChange)="toggleWeather($event)"  [checked]="weather_checked">Weather</mat-slide-toggle>
+                <mat-slide-toggle (toggleChange)="toggleEvent($event)"  [checked]="events_checked">Events</mat-slide-toggle>
+
             </div>
             <div style="overflow-y: scroll; display: flex; margin-bottom: 10px; flex: 1">
-                <div *ngIf="!generated" style="flex:1;">jhv</div>
+                <div *ngIf="!generated" style="flex:1; display: flex;">
+                    <span style="margin: 20px auto auto auto">No suggested orders available...</span>
+                </div>
                 <table *ngIf="generated" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             
                     <!-- Position Column -->
@@ -72,19 +104,36 @@
                         <th mat-header-cell *matHeaderCellDef> AI Recommendation </th>
                         <td mat-cell *matCellDef="let element"> {{element.ai_reco}} </td>
                     </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="historical_sales">
+                        <th mat-header-cell *matHeaderCellDef> Historical Sales </th>
+                        <td mat-cell *matCellDef="let element"> {{element.historical_sales}} </td>
+                    </ng-container>
                     
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="weather_factor">
                         <th mat-header-cell *matHeaderCellDef> Weather Bias </th>
                         <td mat-cell *matCellDef="let element"> {{element.weather_factor * 100}}% </td>
                     </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container ng-hide="events_checked" matColumnDef="event_factor">
+                        <th mat-header-cell *matHeaderCellDef> Event Bias </th>
+                        <td mat-cell *matCellDef="let element"> {{element.event_factor * 100}}% </td>
+                    </ng-container>
                     
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
             </div>
-            <button [ngClass]="{'table-card__button-generate': (!generated)}" mat-button-raised (click)="generateTable()">Bestellen</button>
+            <button [ngClass]="{'table-card__button-generate': (!generated)}" mat-button-raised (click)="generateTable()">Order now</button>
         </mat-card>
-
+        <div class="fab-button">
+            <mat-icon style="margin: auto;">message</mat-icon>
+        </div>
+        <div class="fab-button-notif">
+            <span style="margin: auto;">1</span>
+        </div>
     </div>
 </div>

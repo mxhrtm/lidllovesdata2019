@@ -7,8 +7,17 @@
 
     &__selector {
         position: absolute;
-        right: 5px;
-        top: 5px;
+        right: 10px;
+        top: 10px;
+        height: 50px;
+        width: 50px; 
+        background: #fff;
+        border-radius: 100px;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
         
         &__overlay {
             background: #fff;
@@ -57,6 +66,19 @@
 .content-card {
     display: flex;
     flex-direction: column;    
+
+    &__slider {
+        display: flex;
+
+        > * {
+            margin: auto;
+        }
+
+        mat-slider-toggle {
+            margin: auto;
+            color: var(--super-lidl);
+        }
+    }
     
     &__headline {
         height: 40px;
@@ -74,14 +96,28 @@
     &__body {
         display: flex;
         flex-direction: row;
+        height: 100%;
+
+        img {
+            margin: auto;
+            max-height: 50px;
+            width: 50px;
+        }
 
         &__weather {
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
+            flex: 1; 
 
-            span{
-                margin: auto auto auto 10px;
-            }
+            // span{
+            //     margin: auto auto auto 10px;
+            // }
+        }
+
+        &__divider {
+            border: 0.5px solid rgba(0,0,0,.42);
+            height: 80%;
+            margin: auto;
         }
     }
 }
@@ -117,4 +153,55 @@ mat-form-field {
 .mat-elevation-z8 {
     box-shadow: none!important;
     flex: 1;
+}
+
+table {
+    margin-top: 10px;
+}
+td {
+    font-style: italic;
+    padding:10px 5px;
+}
+
+.checkbox {
+    margin: auto;
+}
+.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background{
+    background: var(--super-lidl)!important;
+}
+
+.fab-button {
+    display: flex;
+    border-radius: 100px;
+    position: absolute;
+    right: 15px;
+    bottom: 55px;
+    height: 55px;
+    width: 55px;
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+    background-color: #757575;
+}
+
+.fab-button-notif {
+    height: 23px;
+    width: 23px;
+    position: absolute;
+    bottom: 90px;
+    right: 13px;
+    background: rgba(176,0,32,0.54);
+    border-radius: 100px;
+    color: #fff;
+    display: flex;
+}
+
+mat-icon {
+    color: #fff;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: var(--super-lidl);
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+background-color: rgba(0,80,131,0.54);
 }

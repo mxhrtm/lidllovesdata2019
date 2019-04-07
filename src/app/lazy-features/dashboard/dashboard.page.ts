@@ -14,20 +14,20 @@ export interface PeriodicElement {
   position: number;
   stock: number;
   ai_reco: number;
+  historical_sales: number;
   weather_factor: number;
+  event_factor: number;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', stock: 1.0079, ai_reco: 20, weather_factor: 0.02 },
-  { position: 2, name: 'Helium', stock: 4.0026, ai_reco: 15, weather_factor: 0.10 },
-  { position: 3, name: 'Lithium', stock: 6.941, ai_reco: 17, weather_factor: 0.12 },
-  { position: 4, name: 'Beryllium', stock: 9.0122, ai_reco: 29, weather_factor: 0.23 },
-  { position: 5, name: 'Boron', stock: 10.811, ai_reco: 18, weather_factor: 0.12 },
-  { position: 6, name: 'Carbon', stock: 12.0107, ai_reco: 59, weather_factor: 0.03 },
-  { position: 7, name: 'Nitrogen', stock: 14.0067, ai_reco: 47, weather_factor: 0.23},
-  { position: 8, name: 'Oxygen', stock: 15.9994, ai_reco: 27, weather_factor: 0.12 },
-  { position: 9, name: 'Fluorine', stock: 18.9984, ai_reco: 82, weather_factor: 0.32 },
-  { position: 10, name: 'Neon', stock: 20.1797, ai_reco: 27, weather_factor: 0.12 },
+  { position: 1, name: 'Mineralwasser', stock: 28, ai_reco: 198, historical_sales: 204,weather_factor: 0.02, event_factor: 0.01 },
+  { position: 2, name: 'Eiscreme', stock: 21, ai_reco: 10, historical_sales: 24, weather_factor: 0.10, event_factor: 0.02},
+  { position: 3, name: 'Freeway Cole', stock: 50, ai_reco: 0, historical_sales: 24 , weather_factor: 0.12 , event_factor: 0.1},
+  { position: 4, name: 'Grillmeister Fleischspieße', stock: 5, ai_reco: 120, historical_sales: 85 , weather_factor: 0.23, event_factor: 0.05},
+  { position: 5, name: 'Brötchen', stock: 50, ai_reco: 179, historical_sales: 219, weather_factor: 0.12, event_factor: 0.042},
+  { position: 6, name: 'Kidney Bohnen Dose', stock: 31, ai_reco: 0, historical_sales: 48, weather_factor: 0.03, event_factor: 0.023},
+  { position: 7, name: 'Eisbergsalat', stock: 5, ai_reco: 85, historical_sales: 78 ,weather_factor: 0.23, event_factor:0.023},
+  { position: 8, name: 'Kong Strong Energy 0,25', stock: 48, ai_reco: 68, historical_sales:72, weather_factor: 0.12, event_factor: 0.001},
 ];
 
 @Component({
@@ -38,7 +38,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class DashboardPage implements OnInit {
   //** TABELLE */
-  displayedColumns: string[] = ['position', 'name', 'stock', 'ai_reco', 'weather_factor'];
+  displayedColumns: string[] = ['position', 'name', 'stock', 'ai_reco', 'historical_sales', 'weather_factor', 'event_factor'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -46,6 +46,9 @@ export class DashboardPage implements OnInit {
   //** TABELLE */
   private _bardata: any;
   public generated: boolean = true;
+
+  public weather_checked = true;
+  public events_checked = true;
 
   myControl = new FormControl();
   options: User[] = [{ name: 'Mary' }, { name: 'Shelley' }, { name: 'Igor' }];
@@ -67,13 +70,13 @@ export class DashboardPage implements OnInit {
     );
 
     this._bardata = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: ['Krombacher Pils 0,5', 'Grillfleisch', 'Tee Pfefferminze'],
       datasets: [
         {
-          label: 'My First dataset',
-          backgroundColor: '#42A5F5',
+           label: 'Demand changes based on datachannels',
+          backgroundColor: '#005083',
           borderColor: '#1E88E5',
-          data: [65, 59, 80, 81, 56, 55, 40]
+          data: [0.13, 0.08, -0.056 ]
         }
       ]
     };
@@ -93,5 +96,22 @@ export class DashboardPage implements OnInit {
 
   generateTable() {
     this.generated = false;
+  }
+
+  toggleEvent(event) {
+    if(this.events_checked){
+      this.displayedColumns = this.displayedColumns.filter(obj => obj !== "event_factor");
+    } else {
+      this.displayedColumns.push('event_factor');
+    }
+    this.events_checked = !this.events_checked;
+  }
+  toggleWeather(event) {
+    if(this.weather_checked){
+      this.displayedColumns = this.displayedColumns.filter(obj => obj !== "weather_factor");
+    } else {
+      this.displayedColumns.push('weather_factor');
+    }
+    this.weather_checked = !this.weather_checked;
   }
 }

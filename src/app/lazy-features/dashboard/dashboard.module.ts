@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 // OTHER
 import { DashboardPage } from './dashboard.page';
 import { SharedComponentsModule } from '@app/components/shared/shared-components.module';
-import { MatButtonModule, MatListModule,  MatIconModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatAutocompleteModule, MatInputModule, MatCard, MatCardModule, MatTableModule } from '@angular/material';
+import { MatButtonModule, MatListModule,  MatIconModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatAutocompleteModule, MatInputModule, MatCard, MatCardModule, MatTableModule, MatCheckboxModule, MatSlideToggleModule } from '@angular/material';
 import { AppComponentsModule } from '@app/components/app-components.module';
 import {ChartModule} from 'primeng/chart'
 import {OverlayPanelModule} from 'primeng/overlaypanel';
@@ -35,7 +35,10 @@ const routs: Routes = [
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule,
+    MatSlideToggleModule
+    
   ],
   declarations: [DashboardPage]
 })
