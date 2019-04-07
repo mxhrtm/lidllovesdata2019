@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+    background: var(--ammd-color-background);
+    height: 100vh;
+    margin: 0;
+    color: var(--ammd-color-primary);
+}
+html {
+    height: 100%;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+}
+
+.button--active {
+    background-color: var(--ammd-color-primary);
+}
+.button--inactive {
+    background-color: #989aa2;   
+}
+
+:root {
+    --ammd-color-primary: #344955;
+    --ammd-color-secondary: #f9aa33;
+    --ammd-color-background: #ededed;
+    --super-lidl: #005083;
+}

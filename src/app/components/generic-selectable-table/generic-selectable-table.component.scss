@@ -1,0 +1,41 @@
+.full-width-table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: calc(100% - 16px);
+  margin: 0 8px;
+}
+
+.mat-row:hover {
+  background: rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+}
+
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+.ripple:hover {
+  /*background: white radial-gradient(circle, transparent 1%, white 1%) center/15000%;*/
+}
+.ripple:active {
+  background-color: #ccc;
+  background-size: 100%;
+  transition: background 0s;
+}
+
+.selected {
+  background-color: rgba(249, 170, 51, 0.5);
+}
+
+mat-card > div {
+  text-align: center;
+
+  span {
+    font-size: 1.5em;
+    font-style: italic;
+    color: var(--ammd-color-primary);
+  }
+}

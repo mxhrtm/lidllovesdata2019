@@ -1,0 +1,45 @@
+<div>
+  <span>
+    <ng-content></ng-content>
+  </span>
+</div>
+<mat-form-field *ngIf="allowFilter">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
+
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <!-- this allows a "master-checkbox" in the headline -->
+      <mat-checkbox *ngIf="allowMultiSelect"
+                    (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxLabel()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? select(row) : null"
+                    [checked]="selection.isSelected(row)"
+                    [aria-label]="checkboxLabel(row)">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+
+  <ng-container *ngFor="let colum of displayedColumns; index as i" matColumnDef="{{colum}}">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{displayedColumnsName[i]}}</th>
+      <td mat-cell *matCellDef="let row">{{row[colum]}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsWithSelect"></tr>
+  <tr [ngClass]="{ 'selected': (isSelected(row))}" class="ripple"(click)="(!onlyCheckboxSelection) ? select(row) : null" mat-row *matRowDef="let row; columns: displayedColumnsWithSelect;"></tr>
+</table>
+
+<mat-paginator *ngIf="enablePaging" #paginator
+    [length]="dataSource.data.length"
+    [pageIndex]="0"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions">
+</mat-paginator>
