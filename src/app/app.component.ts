@@ -7,7 +7,7 @@ import { WebsocketSignalRService } from './services';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'AMMD-Interface';
+  title = 'Lidl-Dashboard';
 
   constructor(private _websocketService: WebsocketSignalRService){
     // this._websocketService.startConnection();

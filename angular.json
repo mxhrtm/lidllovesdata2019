@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "AMMD-Interface": {
+    "Lidl-Dashboard": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/AMMD-Interface",
+            "outputPath": "dist/Lidl-Dashboard",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "AMMD-Interface:build"
+            "browserTarget": "Lidl-Dashboard:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "AMMD-Interface:build:production"
+              "browserTarget": "Lidl-Dashboard:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AMMD-Interface:build"
+            "browserTarget": "Lidl-Dashboard:build"
           }
         },
         "test": {
@@ -108,7 +108,7 @@
         }
       }
     },
-    "AMMD-Interface-e2e": {
+    "Lidl-Dashboard-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -117,11 +117,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "AMMD-Interface:serve"
+            "devServerTarget": "Lidl-Dashboard:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "AMMD-Interface:serve:production"
+              "devServerTarget": "Lidl-Dashboard:serve:production"
             }
           }
         },
@@ -137,7 +137,7 @@
       }
     }
   },
-  "defaultProject": "AMMD-Interface",
+  "defaultProject": "Lidl-Dashboard",
   "cli": {
     "defaultCollection": "@ngrx/schematics"
   }
