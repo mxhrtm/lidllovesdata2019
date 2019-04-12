@@ -44,7 +44,7 @@ export class DashboardPage implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   //** TABELLE */
-  private _bardata: any;
+  public _bardata: any;
   public generated: boolean = true;
 
   public weather_checked = true;
